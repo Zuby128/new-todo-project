@@ -5,6 +5,9 @@
   --foreground: #171717;
 }
 
+$text-shadow: #000000;
+$blue-border: #071d55;
+
 body {
   color: var(--foreground);
   background: var(--background);
@@ -87,7 +90,7 @@ body {
         text-underline-position: from-font;
         text-decoration-skip-ink: none;
         margin-bottom: 13px;
-        text-shadow: 2px 2px #000000;
+        text-shadow: 2px 2px $text-shadow;
       }
       & .bottom {
         font-family: Roboto;
@@ -98,7 +101,7 @@ body {
         text-align: left;
         text-underline-position: from-font;
         text-decoration-skip-ink: none;
-        text-shadow: 2px 2px #000000;
+        text-shadow: 2px 2px $text-shadow;
       }
     }
   }
@@ -130,7 +133,7 @@ body {
         text-align: left;
         text-underline-position: from-font;
         text-decoration-skip-ink: none;
-        color: #071d55;
+        color: $blue-border;
         text-shadow: 1px 1px #ffffff;
         text-decoration: none;
       }
@@ -142,7 +145,7 @@ body {
       right: 22px;
       width: 66.11px;
       height: 71px;
-      background: #071d55;
+      background: $blue-border;
       align-content: center;
       text-align: center;
       font-family: Roboto;
@@ -189,7 +192,7 @@ body {
           align-items: center;
           justify-content: center;
           transition: background-color 0.3s, transform 0.3s;
-          border: 1.5px solid #071d55;
+          border: 1.5px solid $blue-border;
         }
 
         .checkbox__inner {
@@ -203,7 +206,7 @@ body {
             font-weight: 500;
             line-height: 16.08px;
             text-align: left;
-            color: #071d55;
+            color: $blue-border;
           }
         }
 
@@ -236,7 +239,7 @@ body {
         }
       }
       & button {
-        border: 1px solid #071d55;
+        border: 1px solid $blue-border;
         width: 51px;
         height: 45px;
         background: transparent;

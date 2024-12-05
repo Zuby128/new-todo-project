@@ -56,16 +56,19 @@ const useTodoStore = create<TodoState>((set, get) => ({
   duplicateTodo: (id: string) => {
     const currentTodos = get().todos;
     const selectedTodo = currentTodos.find((todo) => todo.id === id);
-    set((state) => ({
-      todos: [
-        ...state.todos,
-        {
-          id: Date.now().toString(),
-          text: selectedTodo!.text,
-          isComplete: false,
-        },
-      ],
-    }));
+
+    if (selectedTodo) {
+      set((state) => ({
+        todos: [
+          ...state.todos,
+          {
+            id: Date.now().toString(),
+            text: selectedTodo.text,
+            isComplete: false,
+          },
+        ],
+      }));
+    }
   },
 }));
 
