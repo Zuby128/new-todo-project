@@ -5,7 +5,7 @@ function ToDoCRUD() {
   const [text, setText] = useState<string>("");
   const addTodo = useTodoStore((state) => state.addTodo);
   const removeTodo = useTodoStore((state) => state.removeTodo);
-  const todo = useTodoStore((state) => state.todo);
+  const selected = useTodoStore((state) => state.todo);
 
   const handleAdd = () => {
     if (text.trim()) {
@@ -25,6 +25,7 @@ function ToDoCRUD() {
             id="task"
             name="task"
             onChange={(e) => setText(e.target.value)}
+            value={text}
           />
         </form>
       </div>
@@ -34,15 +35,16 @@ function ToDoCRUD() {
           <button
             className="delete"
             onClick={() => {
-              if (!todo) return;
-              removeTodo(todo.id);
+              if (!selected) return;
+              removeTodo(selected.id);
             }}
+            disabled={!selected}
           >
             Delete
           </button>
         </div>
         <div>
-          <button className="save" onClick={handleAdd}>
+          <button className="save" onClick={handleAdd} disabled={!text}>
             Save
           </button>
         </div>

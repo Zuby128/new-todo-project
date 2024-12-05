@@ -13,7 +13,7 @@ function ToDoList() {
           <div className="custom-checkbox">
             <input
               type="checkbox"
-              id="i"
+              id={v.id}
               checked={v.isComplete}
               onChange={() => {
                 toggleTodo(v.id);
@@ -21,7 +21,7 @@ function ToDoList() {
               }}
             />
 
-            <label htmlFor="i" className="checkbox">
+            <label htmlFor={v.id} className="checkbox">
               <div className="checkbox__inner">
                 <div className="ball"></div>
                 <div className="text">{v.text}</div>
