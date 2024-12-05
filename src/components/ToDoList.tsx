@@ -29,7 +29,7 @@ function ToDoList() {
             </label>
           </div>
           <button
-            onChange={() => {
+            onClick={() => {
               selectTodo(v.id);
             }}
           >
