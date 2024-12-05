@@ -1,16 +1,29 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useTodoStore from "../store/todoStore";
 
 function ToDoCRUD() {
   const [text, setText] = useState<string>("");
   const addTodo = useTodoStore((state) => state.addTodo);
   const removeTodo = useTodoStore((state) => state.removeTodo);
+  const editTodo = useTodoStore((state) => state.editTodo);
   const selected = useTodoStore((state) => state.todo);
+
+  useEffect(() => {
+    setSelectedValue();
+  }, [selected]);
+
+  const setSelectedValue = () => {
+    if (selected) setText(selected?.text);
+  };
 
   const handleAdd = () => {
     if (text.trim()) {
-      addTodo(text);
-      setText("");
+      if (selected?.id) {
+        editTodo(selected.id, text);
+      } else {
+        addTodo(text);
+        setText("");
+      }
     }
   };
 

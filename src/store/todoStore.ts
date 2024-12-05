@@ -13,6 +13,7 @@ type TodoState = {
   toggleTodo: (id: string) => void;
   removeTodo: (id: string) => void;
   selectTodo: (id: string) => Todo | null;
+  editTodo: (id: string, text: string) => void;
 };
 
 const useTodoStore = create<TodoState>((set, get) => ({
@@ -29,6 +30,12 @@ const useTodoStore = create<TodoState>((set, get) => ({
     set((state) => ({
       todos: state.todos.map((todo) =>
         todo.id === id ? { ...todo, isComplete: !todo.isComplete } : todo
+      ),
+    })),
+  editTodo: (id: string, text: string) =>
+    set((state) => ({
+      todos: state.todos.map((todo) =>
+        todo.id === id ? { ...todo, text } : todo
       ),
     })),
   removeTodo: (id: string) =>

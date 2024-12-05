@@ -28,7 +28,13 @@ function ToDoList() {
               </div>
             </label>
           </div>
-          <button>Edit</button>
+          <button
+            onChange={() => {
+              selectTodo(v.id);
+            }}
+          >
+            Edit
+          </button>
         </div>
       ))}
       <div className="todo-left__content-add">
