@@ -12,8 +12,9 @@ type TodoState = {
   addTodo: (text: string) => void;
   toggleTodo: (id: string) => void;
   removeTodo: (id: string) => void;
-  selectTodo: (id: string) => Todo | null;
+  selectTodo: (id: string | null) => Todo | null;
   editTodo: (id: string, text: string) => void;
+  duplicateTodo: (id: string) => void;
 };
 
 const useTodoStore = create<TodoState>((set, get) => ({
@@ -42,11 +43,29 @@ const useTodoStore = create<TodoState>((set, get) => ({
     set((state) => ({
       todos: state.todos.filter((todo) => todo.id !== id),
     })),
-  selectTodo: (id: string) => {
-    const currentTodos = get().todos; // Use `get` to access the current state
+  selectTodo: (id: string | null) => {
+    if (!id) {
+      set({ todo: null });
+      return null;
+    }
+    const currentTodos = get().todos;
     const selectedTodo = currentTodos.find((todo) => todo.id === id) || null;
-    set({ todo: selectedTodo }); // Update the state with the selected todo
-    return selectedTodo; // Return the selected todo
+    set({ todo: selectedTodo });
+    return selectedTodo;
+  },
+  duplicateTodo: (id: string) => {
+    const currentTodos = get().todos;
+    const selectedTodo = currentTodos.find((todo) => todo.id === id);
+    set((state) => ({
+      todos: [
+        ...state.todos,
+        {
+          id: Date.now().toString(),
+          text: selectedTodo!.text,
+          isComplete: false,
+        },
+      ],
+    }));
   },
 }));
 

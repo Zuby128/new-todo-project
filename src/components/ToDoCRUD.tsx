@@ -6,6 +6,7 @@ function ToDoCRUD() {
   const addTodo = useTodoStore((state) => state.addTodo);
   const removeTodo = useTodoStore((state) => state.removeTodo);
   const editTodo = useTodoStore((state) => state.editTodo);
+  const selectTodo = useTodoStore((state) => state.selectTodo);
   const selected = useTodoStore((state) => state.todo);
 
   useEffect(() => {
@@ -20,6 +21,8 @@ function ToDoCRUD() {
     if (text.trim()) {
       if (selected?.id) {
         editTodo(selected.id, text);
+        setText("");
+        selectTodo(null);
       } else {
         addTodo(text);
         setText("");

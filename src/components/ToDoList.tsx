@@ -4,6 +4,15 @@ function ToDoList() {
   const todos = useTodoStore((state) => state.todos);
   const toggleTodo = useTodoStore((state) => state.toggleTodo);
   const selectTodo = useTodoStore((state) => state.selectTodo);
+  const duplicateToDo = useTodoStore((state) => state.selectTodo);
+  const selected = useTodoStore((state) => state.todo);
+
+  const onDuplicateToDo = () => {
+    if (selected) {
+      console.log(selected, todos);
+      duplicateToDo(selected.id);
+    }
+  };
 
   return (
     <div className="todo-left__content">
@@ -39,7 +48,9 @@ function ToDoList() {
       ))}
       <div className="todo-left__content-add">
         {/* todo left content add button */}
-        <button>+</button>
+        <button onClick={() => onDuplicateToDo()} disabled={!selected}>
+          +
+        </button>
       </div>
     </div>
   );
